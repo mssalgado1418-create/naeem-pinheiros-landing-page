@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #0A0A0A;
+  --color-champagne: #C5A367;
+  --color-emerald-glass: rgba(16, 42, 39, 0.4);
+
+  --font-serif: "Bodoni Moda", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --letter-spacing-widest: 0.25em;
+
+  --animate-reveal-up: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes revealUp {
+    from {
+      clip-path: inset(100% 0 0 0);
+      transform: translateY(50px);
+      opacity: 0;
+    }
+
+    to {
+      clip-path: inset(0 0 0 0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Shimmer Border Light Effect */
+  @keyframes shimmerBorder {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(197, 163, 103, 0.2);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &:hover {
+    border-color: #C5A367;
+    background: rgba(197, 163, 103, 0.05);
+    transform: translateY(-8px);
+  }
+}
+
+@utility shimmer-overlay {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10;
+  /* Light beam passing over borders */
+  background: linear-gradient(90deg,
+      transparent 20%,
+      rgba(197, 163, 103, 0.4) 50%,
+      transparent 80%);
+  background-size: 200% auto;
+  opacity: 0;
+  mask: padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  padding: 1px;
+  /* border thickness */
+}
+
+@utility is-shimmering {
+  opacity: 1;
+  animation: shimmerBorder 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@utility magnetic-area {
+  position: relative;
+  overflow: hidden;
+}
+
+@utility frosted-emerald-overlay {
+  background: linear-gradient(135deg, rgba(16, 42, 39, 0.6) 0%, rgba(10, 10, 10, 0.9) 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C5A367;
+}
+
+:root {
+  --background: #0A0A0A;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
